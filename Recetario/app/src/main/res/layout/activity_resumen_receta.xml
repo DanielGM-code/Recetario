@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResumenReceta">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF5722"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center|center_vertical"
+                    android:text="¡A COCINAR!"
+                    android:textColor="#FFFEFC"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="340dp"
+                android:layout_height="166dp"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewReceta"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_launcher_background" />
+
+                    <ImageView
+                        android:id="@+id/imageViewValoracion"
+                        android:layout_width="120dp"
+                        android:layout_height="33dp"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@drawable/cinco_estrella" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="232dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewNombreReceta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/textViewNumPersonas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="TextView" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewDificultadReceta"
+                            android:layout_width="92dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="TextView" />
+
+                        <TextView
+                            android:id="@+id/textViewDuracionReceta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ingredientes:" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/layoutIngrediente"
+                        android:layout_width="211dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutCantidad"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutUnidad"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Pasos:" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/layoutNumeroPaso"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutPaso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/botonAgregarFavorito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:backgroundTint="#E3E3E3"
+        app:layout_constraintBottom_toTopOf="@+id/botonEliminarReceta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/estrella_gris" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/botonEliminarReceta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:clickable="true"
+        app:backgroundTint="#E3E3E3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
