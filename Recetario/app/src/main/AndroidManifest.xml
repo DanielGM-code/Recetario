@@ -28,7 +28,7 @@
             android:name=".Informacion"
             android:exported="true" />
         <activity
-            android:name=".Navegador"
+            android:name=".Inspiracion"
             android:exported="true" />
         <activity
             android:name=".ListaRecetas"

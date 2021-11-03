@@ -52,7 +52,7 @@ class RegistrarReceta : AppCompatActivity() {
         registrarReceta.setOnClickListener{
 
             val nombre = editTextNombreReceta.text.toString()
-            val numPersonas = editTextNumPersonas.text.toString().toInt()
+            val numeroPersonas = editTextDuracion.text.toString()
             val imagenReceta = R.drawable.imagencomplementos
             val estadoReceta = "Activo"
             val calificacion = spinnerCalificacion.selectedItem.toString()
@@ -66,70 +66,83 @@ class RegistrarReceta : AppCompatActivity() {
                 "Cinco estrellas" -> imagenCalificacion = R.drawable.cinco_estrella
             }
             val dificultad = spinnerDificultad.selectedItem.toString()
-            val duracion = editTextDuracion.text.toString().toInt()
+            val duracion = editTextDuracion.text.toString()
 
-            val receta = Receta(nombre,
-                numPersonas,
-                imagenReceta,
-                estadoReceta,
-                tipoReceta,
-                imagenCalificacion,
-                dificultad,
-                duracion)
 
-            CoroutineScope(Dispatchers.IO).launch {
-                database.recetas().insertAll(receta)
+            if(validarCamposReceta(arrayIngredientes, arrayPasos) && hayIngredientes(arrayIngredientes) && hayPasos(arrayPasos)){
+                val receta = Receta(nombre,
+                    numeroPersonas,
+                    imagenReceta,
+                    estadoReceta,
+                    tipoReceta,
+                    imagenCalificacion,
+                    dificultad,
+                    duracion)
 
-                for(ingrediente in arrayIngredientes){
-                    database.ingredientes().insertAll(ingrediente)
+                CoroutineScope(Dispatchers.IO).launch {
+                    database.recetas().insertAll(receta)
+
+                    for(ingrediente in arrayIngredientes){
+                        database.ingredientes().insertAll(ingrediente)
+                    }
+
+                    for(paso in arrayPasos){
+                        database.pasos().insertAll(paso)
+                    }
+
+                    imageUri?.let {
+                        ImageController.guardarImagen(this@RegistrarReceta, idReceta.toLong(), it)
+                    }
+
+                    this@RegistrarReceta.finish()
                 }
-
-                for(paso in arrayPasos){
-                    database.pasos().insertAll(paso)
-                }
-
-                imageUri?.let {
-                    ImageController.guardarImagen(this@RegistrarReceta, idReceta.toLong(), it)
-                }
-
-                this@RegistrarReceta.finish()
+            }else{
+                Toast.makeText(this, "Asegurese de llenar todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
 
         val agregarIngrediente = findViewById<Button>(R.id.botonAgregarIngrediente)
         agregarIngrediente.setOnClickListener{
 
-            val nombreIngrediente = editTextIngrediente.text.toString()
-            val cantidadIngrdiente = editTextCantidad.text.toString()
-            val unidadIngrediente = spinnerUnidad.selectedItem.toString()
+            if(validarCamposIngrediente()){
+                val nombreIngrediente = editTextIngrediente.text.toString()
+                val cantidadIngrdiente = editTextCantidad.text.toString()
+                val unidadIngrediente = spinnerUnidad.selectedItem.toString()
 
-            val ingrediente = IngredientesReceta(idReceta,
-                nombreIngrediente,
-                cantidadIngrdiente,
-                unidadIngrediente,
-            "Activo")
+                val ingrediente = IngredientesReceta(idReceta,
+                    nombreIngrediente,
+                    cantidadIngrdiente,
+                    unidadIngrediente,
+                    "Activo")
 
-            arrayIngredientes.add(ingrediente)
+                arrayIngredientes.add(ingrediente)
 
-            llenarTablaIngredientes(arrayIngredientes)
+                llenarTablaIngredientes(arrayIngredientes)
 
-            limpiarCamposIngredientes()
+                limpiarCamposIngredientes()
+            }else{
+                Toast.makeText(this, "Asegurese de llenar todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val agregarPaso = findViewById<Button>(R.id.botonAgregarPaso)
         agregarPaso.setOnClickListener{
 
-            val descripcionPaso = editTextPaso.text.toString()
+            if(validarCamposPaso()){
+                val descripcionPaso = editTextPaso.text.toString()
 
-            val paso = PasosReceta(idReceta,
-                descripcionPaso,
-                "Activo")
+                val paso = PasosReceta(idReceta,
+                    descripcionPaso,
+                    "Activo")
 
-            arrayPasos.add(paso)
+                arrayPasos.add(paso)
 
-            llenarTablaPasos(arrayPasos)
+                llenarTablaPasos(arrayPasos)
 
-            limpiarCamposPasos()
+                limpiarCamposPasos()
+            }else{
+                Toast.makeText(this, "Asegurese de llenar todos los campos", Toast.LENGTH_SHORT).show()
+            }
         }
 
         imageViewImagenSeleccionada.setOnClickListener {
@@ -138,14 +151,22 @@ class RegistrarReceta : AppCompatActivity() {
 
         val quitarIngrediente = findViewById<Button>(R.id.botonQuitarIngrediente)
         quitarIngrediente.setOnClickListener {
-            arrayIngredientes.removeLast()
-            llenarTablaIngredientes(arrayIngredientes)
+            if(hayIngredientes(arrayIngredientes)){
+                arrayIngredientes.removeLast()
+                llenarTablaIngredientes(arrayIngredientes)
+            }else{
+                Toast.makeText(this, "No hay ingredientes que borrar", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val quitarPaso = findViewById<Button>(R.id.botonQuitarPaso)
         quitarPaso.setOnClickListener {
-            arrayPasos.removeLast()
-            llenarTablaPasos(arrayPasos)
+            if(hayPasos(arrayPasos)){
+                arrayPasos.removeLast()
+                llenarTablaPasos(arrayPasos)
+            }else{
+                Toast.makeText(this, "No hay pasos que borrar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -215,6 +236,31 @@ class RegistrarReceta : AppCompatActivity() {
         spinnerUnidad.adapter = adaptadorUnidad
         spinnerCalificacion.adapter = adaptadorCalificacion
         spinnerDificultad.adapter = adaptadorDificultad
+    }
+
+    private fun validarCamposReceta(arrayIngredientes: MutableList<IngredientesReceta>, arrayPasos: MutableList<PasosReceta>) : Boolean{
+        return editTextNombreReceta.text.isNotEmpty() &&
+                editTextNumPersonas.text.isNotEmpty() &&
+                editTextDuracion.text.isNotEmpty() &&
+                arrayIngredientes.isNotEmpty() &&
+                arrayPasos.isNotEmpty()
+    }
+
+    private fun validarCamposIngrediente() : Boolean{
+        return editTextIngrediente.text.isNotEmpty() &&
+                editTextCantidad.text.isNotEmpty()
+    }
+
+    private fun validarCamposPaso() : Boolean{
+        return editTextPaso.text.isNotEmpty()
+    }
+
+    private fun hayIngredientes(arrayIngredientes: MutableList<IngredientesReceta>) : Boolean{
+        return arrayIngredientes.isNotEmpty()
+    }
+
+    private fun hayPasos(arrayPasos: MutableList<PasosReceta>) : Boolean{
+        return arrayPasos.isNotEmpty()
     }
 
     private fun limpiarCamposIngredientes(){

@@ -8,25 +8,16 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FF5722"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/botonRegresar"
-            android:layout_width="52dp"
-            android:layout_height="60dp"
-            android:backgroundTint="#FF5722"
-            app:srcCompat="?attr/homeAsUpIndicator"
-            app:tint="#FFFFFF" />
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="359dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="6dp"
             android:gravity="center|center_vertical"
@@ -63,7 +54,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton11"
+                android:id="@+id/botonInstagram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
@@ -72,7 +63,7 @@
                 app:srcCompat="@drawable/logo_instagram" />
 
             <ImageButton
-                android:id="@+id/imageButton12"
+                android:id="@+id/botonGitHub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,29 +72,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="#FFFFFF"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Recetas proporcionadas por: Cinthia Sarutte Correa"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#00FFFFFF"
-                app:srcCompat="@drawable/logo_instagram" />
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

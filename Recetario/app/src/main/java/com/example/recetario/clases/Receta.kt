@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "recetas")
 class Receta (val nombreReceta:String,
-              val numPersonas: Int,
+              val numPersonas: String,
               val imagenReceta: Int,
               val estadoReceta: String,
               val tipoReceta: String,
               val valoracionReceta: Int,
               val dificultadReceta: String,
-              val duracionReceta: Int,
+              val duracionReceta: String,
               @PrimaryKey(autoGenerate = true)
               var idReceta: Int = 0) : Serializable
