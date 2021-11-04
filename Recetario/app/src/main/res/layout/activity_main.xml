@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F9F7ED">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:layout_width="411dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="61dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:orientation="vertical">
 
@@ -156,15 +157,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"></LinearLayout>
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/botonInformacion"
-                    android:layout_width="327dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#FF5722"
-                    android:text="Acerca de..."
-                    android:textColor="#FFFFFF" />
+                    <ImageButton
+                        android:id="@+id/botonManual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/imagenmanual" />
+
+                    <ImageButton
+                        android:id="@+id/botonInformacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="30dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#00FFFFFF"
+                        app:srcCompat="@drawable/imagenacercade" />
+                </LinearLayout>
 
             </LinearLayout>
 

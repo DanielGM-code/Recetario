@@ -3,8 +3,6 @@ package com.example.recetario
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
-import android.widget.Button
 import android.widget.ImageButton
 
 class MainActivity : AppCompatActivity() {
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val abrirAcercaDe = findViewById<Button>(R.id.botonInformacion)
+        val abrirAcercaDe = findViewById<ImageButton>(R.id.botonInformacion)
         abrirAcercaDe.setOnClickListener {
             val intent = Intent(this, Informacion::class.java)
             startActivity(intent)
@@ -71,6 +69,12 @@ class MainActivity : AppCompatActivity() {
         val abrirFavoritos = findViewById<ImageButton>(R.id.botonFavoritos)
         abrirFavoritos.setOnClickListener{
             val intent = Intent(this, Favoritos::class.java)
+            startActivity(intent)
+        }
+
+        val abrirManual = findViewById<ImageButton>(R.id.botonManual)
+        abrirManual.setOnClickListener {
+            val intent = Intent(this, ManualDeUsuario::class.java)
             startActivity(intent)
         }
     }

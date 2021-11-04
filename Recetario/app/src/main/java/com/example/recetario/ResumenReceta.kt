@@ -38,8 +38,8 @@ class ResumenReceta : AppCompatActivity() {
         var idReceta = receta.idReceta
         var listaIngredientes = emptyList<IngredientesReceta>()
         var listaPasos = emptyList<PasosReceta>()
-        var listaCantidades = mutableListOf<Int>()
-        var listaCantidadesAux = mutableListOf<Int>()
+        var listaCantidades = mutableListOf<Float>()
+        var listaCantidadesAux = mutableListOf<Float>()
 
         val imageUri = ImageController.getImageUri(this, idReceta.toLong())
 
@@ -170,15 +170,15 @@ class ResumenReceta : AppCompatActivity() {
         }
     }
 
-    private fun obtenerCantidades(listaIngredientes: List<IngredientesReceta>, listaCantidades: MutableList<Int>, listaCantidadesAux: MutableList<Int>) {
+    private fun obtenerCantidades(listaIngredientes: List<IngredientesReceta>, listaCantidades: MutableList<Float>, listaCantidadesAux: MutableList<Float>) {
         for(ingrediente in listaIngredientes){
-            listaCantidades.add(ingrediente.cantidadIngrediente.toInt())
-            listaCantidadesAux.add(ingrediente.cantidadIngrediente.toInt())
+            listaCantidades.add(ingrediente.cantidadIngrediente.toFloat())
+            listaCantidadesAux.add(ingrediente.cantidadIngrediente.toFloat())
         }
     }
 
 
-    private fun llenarTablaIngredientes(listaIngredientes: List<IngredientesReceta>, listaCantidades: MutableList<Int>, listaCantidadesAux: MutableList<Int>) {
+    private fun llenarTablaIngredientes(listaIngredientes: List<IngredientesReceta>, listaCantidades: MutableList<Float>, listaCantidadesAux: MutableList<Float>) {
 
         var layoutIngrediente = findViewById<LinearLayout>(R.id.layoutIngrediente)
         var layoutCantidad = findViewById<LinearLayout>(R.id.layoutCantidad)
@@ -206,7 +206,6 @@ class ResumenReceta : AppCompatActivity() {
     }
 
     private fun llenarTablaPasos(listaPasos: List<PasosReceta>) {
-        var layoutNumPaso = findViewById<LinearLayout>(R.id.layoutNumeroPaso)
         var layoutPaso = findViewById<LinearLayout>(R.id.layoutPaso)
 
         var numeroPaso = 0
@@ -214,13 +213,12 @@ class ResumenReceta : AppCompatActivity() {
         for(paso in listaPasos){
             numeroPaso += 1
 
-            var textViewNumeroPaso = TextView(this)
             var textViewPaso = TextView(this)
 
-            textViewNumeroPaso.setText(numeroPaso.toString())
-            textViewPaso.setText(paso.descripcionPaso)
+            var descripcion = "${numeroPaso}. ${paso.descripcionPaso} \n"
 
-            layoutNumPaso.addView(textViewNumeroPaso)
+            textViewPaso.setText(descripcion)
+
             layoutPaso.addView(textViewPaso)
         }
     }
@@ -249,23 +247,32 @@ class ResumenReceta : AppCompatActivity() {
         return editTextNumeroPersonas.text.isNotEmpty()
     }
 
-    private fun calcularCantidades(listaCantidadesAux: MutableList<Int>, listaCantidades: MutableList<Int>, receta: Receta){
+    private fun calcularCantidades(listaCantidadesAux: MutableList<Float>, listaCantidades: MutableList<Float>, receta: Receta){
         var numPersonas = editTextNumeroPersonas.text.toString().toInt()
         var numPersonasRecetaOriginal = receta.numPersonas.toInt()
         var numPersonasActual = numPersonas
         var posicionCantidad = 0
 
-        for(cantidad in listaCantidades){
-            var cantidadCalculada = cantidad * numPersonas / numPersonasRecetaOriginal
+        if(numPersonasRecetaOriginal <= numPersonasActual){
 
-            listaCantidadesAux.set(posicionCantidad, cantidadCalculada)
+            for(cantidad in listaCantidades){
+                var cantidadCalculada = cantidad * numPersonas / numPersonasRecetaOriginal
 
-            posicionCantidad += 1
+                listaCantidadesAux.set(posicionCantidad, cantidadCalculada)
+
+                posicionCantidad += 1
+            }
+
+            numPersonasActual = numPersonas
+
+            textViewNumPersonas.text = "Cantidad: ${numPersonasActual} personas"
+        }else{
+            AlertDialog.Builder(this).apply {
+                setMessage("Ingrese una cantidad mayor a la receta original")
+
+                setNegativeButton("Ok", null)
+            }.show()
         }
-
-        numPersonasActual = numPersonas
-
-        textViewNumPersonas.text = "Cantidad: ${numPersonasActual} personas"
     }
 
     private fun limpiarCampo(){

@@ -209,10 +209,8 @@ class RegistrarReceta : AppCompatActivity() {
     }
 
     private fun llenarTablaPasos(arrayPasos: MutableList<PasosReceta>) {
-        var layoutNumeroPaso = findViewById<LinearLayout>(R.id.layoutNumeroPaso)
         var layoutPaso = findViewById<LinearLayout>(R.id.layoutDescripcion)
 
-        layoutNumeroPaso.removeAllViewsInLayout()
         layoutPaso.removeAllViewsInLayout()
 
         var contadorPaso = 0
@@ -220,13 +218,12 @@ class RegistrarReceta : AppCompatActivity() {
         for(paso in arrayPasos){
             contadorPaso += 1
 
-            var textViewNumeroPaso = TextView(this)
             var textViewPaso = TextView(this)
 
-            textViewNumeroPaso.setText(contadorPaso.toString())
-            textViewPaso.setText(paso.descripcionPaso)
+            var descripcion = "${contadorPaso}. ${paso.descripcionPaso} \n"
 
-            layoutNumeroPaso.addView(textViewNumeroPaso)
+            textViewPaso.setText(descripcion)
+
             layoutPaso.addView(textViewPaso)
         }
 
@@ -234,7 +231,7 @@ class RegistrarReceta : AppCompatActivity() {
 
     private fun llenarSpiners(){
         val spinnerUnidad = findViewById<Spinner>(R.id.spinnerUnidad)
-        val listaUnidad = arrayOf("gr", "ml", "cda", "cdita", "tz", "pz")
+        val listaUnidad = arrayOf("gr", "L", "ml", "pz", "tz", "cda", "cdita", "oz")
         val adaptadorUnidad = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaUnidad)
 
         val spinnerCalificacion = findViewById<Spinner>(R.id.spinnerCalificacion)

@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_favoritos.xml" value="0.1838768115942029" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_informacion.xml" value="0.33" />
-        <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_inspiracion.xml" value="0.16259057971014493" />
+        <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_inspiracion.xml" value="0.22" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_lista_recetas.xml" value="0.22" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_lista_recetas_favoritas.xml" value="0.1716485507246377" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_manual_de_usuario.xml" value="0.2031488065007618" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_menu_principal.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_navegador.xml" value="0.33" />
         <entry key="..\:/Users/dagam/Desktop/Recetario/app/src/main/res/layout/activity_registrar_receta.xml" value="0.33" />
