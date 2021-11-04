@@ -5,6 +5,8 @@ Autor: Daniel García Morales
 
 Lenguaje: Kotlin
 
+Plataforma: Android
+
 Versión 1.0 estable
 
 Última actualización 04/nov/21
