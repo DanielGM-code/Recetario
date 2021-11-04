@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.recetario">
+    package="com.example.recetario" >
 
     <application
         android:allowBackup="true"
@@ -8,21 +8,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity
-            android:name=".lista_recetas_favoritas"
-            android:exported="true" />
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
-            android:name=".scroll"
+            android:name=".Favoritos"
             android:exported="true" />
         <activity
             android:name=".RegistrarReceta"
             android:exported="true" />
         <activity
             android:name=".ResumenReceta"
-            android:exported="true" />
-        <activity
-            android:name=".MenuPrincipal"
             android:exported="true" />
         <activity
             android:name=".Informacion"
@@ -34,16 +39,8 @@
             android:name=".ListaRecetas"
             android:exported="true" />
         <activity
-            android:name=".VistaReceta"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true" >
         </activity>
     </application>
 

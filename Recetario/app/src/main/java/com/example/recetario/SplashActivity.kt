@@ -1,11 +1,12 @@
 package com.example.recetario
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class scroll : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scroll)
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

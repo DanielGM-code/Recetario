@@ -68,12 +68,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        /*val abrirFavoritos = findViewById<ImageButton>(R.id.botonFavoritos)
+        val abrirFavoritos = findViewById<ImageButton>(R.id.botonFavoritos)
         abrirFavoritos.setOnClickListener{
-
-            val intent = Intent(this, lista_recetas_favoritas::class.java)
-            intent.putExtra("TipoReceta", true)
+            val intent = Intent(this, Favoritos::class.java)
             startActivity(intent)
-        }*/
+        }
     }
 }

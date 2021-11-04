@@ -9,8 +9,11 @@ import com.example.recetario.clases.Receta
 
 @Dao
 interface RecetaDao {
-    @Query("SELECT * FROM recetas WHERE tipoReceta = :tipo AND estadoReceta = 'Activo'")
+    @Query("SELECT * FROM recetas WHERE tipoReceta = :tipo AND estadoReceta = 'Activo' ORDER BY nombreReceta ASC")
     fun getAll(tipo: String): LiveData<List<Receta>>
+
+    @Query("SELECT * FROM recetas WHERE esFavorito = 'esFavorito' AND estadoReceta = 'Activo' ORDER BY nombreReceta ASC")
+    fun getAllFavoritos(): LiveData<List<Receta>>
 
     @Query("SELECT * FROM recetas WHERE idReceta = :id AND estadoReceta = 'Activo'")
     fun get(id: Int): LiveData<Receta>

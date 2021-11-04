@@ -1,6 +1,8 @@
 package com.example.recetario
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -52,7 +54,7 @@ class RegistrarReceta : AppCompatActivity() {
         registrarReceta.setOnClickListener{
 
             val nombre = editTextNombreReceta.text.toString()
-            val numeroPersonas = editTextDuracion.text.toString()
+            val numeroPersonas = editTextNumPersonas.text.toString()
             val imagenReceta = R.drawable.imagencomplementos
             val estadoReceta = "Activo"
             val calificacion = spinnerCalificacion.selectedItem.toString()
@@ -70,32 +72,42 @@ class RegistrarReceta : AppCompatActivity() {
 
 
             if(validarCamposReceta(arrayIngredientes, arrayPasos) && hayIngredientes(arrayIngredientes) && hayPasos(arrayPasos)){
-                val receta = Receta(nombre,
-                    numeroPersonas,
-                    imagenReceta,
-                    estadoReceta,
-                    tipoReceta,
-                    imagenCalificacion,
-                    dificultad,
-                    duracion)
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    database.recetas().insertAll(receta)
+                AlertDialog.Builder(this).apply {
+                    setMessage("¿Estás seguro(a) de que quieres guardar esta receta?")
 
-                    for(ingrediente in arrayIngredientes){
-                        database.ingredientes().insertAll(ingrediente)
+                    setPositiveButton("Sí"){ _: DialogInterface, _: Int ->
+                        val receta = Receta(nombre,
+                            numeroPersonas,
+                            imagenReceta,
+                            estadoReceta,
+                            tipoReceta,
+                            imagenCalificacion,
+                            dificultad,
+                            duracion,
+                            "noFavorito")
+
+                        CoroutineScope(Dispatchers.IO).launch {
+                            database.recetas().insertAll(receta)
+
+                            for(ingrediente in arrayIngredientes){
+                                database.ingredientes().insertAll(ingrediente)
+                            }
+
+                            for(paso in arrayPasos){
+                                database.pasos().insertAll(paso)
+                            }
+
+                            imageUri?.let {
+                                ImageController.guardarImagen(this@RegistrarReceta, idReceta.toLong(), it)
+                            }
+
+                            this@RegistrarReceta.finish()
+                        }
                     }
 
-                    for(paso in arrayPasos){
-                        database.pasos().insertAll(paso)
-                    }
-
-                    imageUri?.let {
-                        ImageController.guardarImagen(this@RegistrarReceta, idReceta.toLong(), it)
-                    }
-
-                    this@RegistrarReceta.finish()
-                }
+                    setNegativeButton("No", null)
+                }.show()
             }else{
                 Toast.makeText(this, "Asegurese de llenar todos los campos", Toast.LENGTH_SHORT).show()
             }

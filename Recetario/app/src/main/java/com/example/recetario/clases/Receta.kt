@@ -13,5 +13,6 @@ class Receta (val nombreReceta:String,
               val valoracionReceta: Int,
               val dificultadReceta: String,
               val duracionReceta: String,
+              val esFavorito: String,
               @PrimaryKey(autoGenerate = true)
               var idReceta: Int = 0) : Serializable
